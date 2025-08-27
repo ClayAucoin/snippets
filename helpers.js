@@ -185,3 +185,22 @@ function showElement(elementId) {
         element.classList.remove("d-none");
     }
 }
+
+
+/**
+ * Play a sound from a given URL.
+ * @param {string} id - The id of button.
+ * @param {boolean} [status=false] - disable or enable.
+ * 
+ * @example
+ * playSound("beep.mp3");
+ */
+function disableButton(elementId, status){
+    const element = document.getElementById(elementId)
+    if(status == true){
+        element.classList.add('disabled');
+    } else {
+        element.classList.remove('disabled');
+    }
+}
+
