@@ -188,7 +188,7 @@ function showElement(elementId) {
 
 
 /**
- * Play a sound from a given URL.
+ * Enable or disable element.
  * @param {string} id - The id of button.
  * @param {boolean} [status=false] - disable or enable.
  * 
