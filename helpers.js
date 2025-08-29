@@ -1,3 +1,5 @@
+console.log("Helpers here.");
+
 /**
  * helpers.js
  * A helper library for HTML/JS projects.
@@ -28,6 +30,7 @@ function onEvent(id, event, handler) {
   console.info("onEvent: Listening for '" + event + "' on #" + id);
 }
 
+
 /**
  * Change a CSS property of an element.
  * @param {string} id - The id of the element.
@@ -47,24 +50,32 @@ function setProperty(id, property, value) {
   console.info("setProperty: #" + id + " → " + property + " = " + value);
 }
 
+
 /**
  * Play a sound from a given URL.
- * @param {string} url - The sound file URL.
+ * @param {string} src - The sound file URL.
  * @param {boolean} [loop=false] - Whether to loop the sound.
+ * @param {number} volume - Volume of the sound. 0.0 = silent, 1.0 = full
  * 
  * @example
  * playSound("beep.mp3");
  */
-function playSound(url, loop) {
-  if (!url) {
-    console.warn("playSound: No URL provided.");
-    return;
-  }
-  var audio = new Audio(url);
-  audio.loop = loop || false;
-  audio.play();
-  console.info("playSound: Playing " + url + (loop ? " (looping)" : ""));
+function playMySound(src, loop = false, volume = 1.0) {
+    if (!src) {
+        console.warn("playMySound: No SRC provided.");
+        return;
+    };
+    const audio = new Audio(src);
+    audio.loop = loop;
+    audio.volume = volume;   // 0.0 = silent, 1.0 = full
+    audio.currentTime = 0;
+    audio.play();
+    console.info("playMySound: Playing " + src +
+        (loop ? " (looping)" : "") +
+        (volume !== undefined ? ` (volume=${volume})` : "")
+    );
 }
+
 
 /**
  * Change the text of an element (not inputs).
@@ -84,6 +95,7 @@ function setText(id, text) {
   console.info("setText: #" + id + " → \"" + text + "\"");
 }
 
+
 /**
  * Get the text from an element (not inputs).
  * @param {string} id - The id of the element.
@@ -100,6 +112,7 @@ function getText(id) {
   }
   return el.textContent;
 }
+
 
 /**
  * Set the value of an input element.
@@ -120,6 +133,7 @@ function setValue(id, value) {
   console.info("setValue: #" + id + " → \"" + value + "\"");
 }
 
+
 /**
  * Get the value of an input element.
  * @param {string} id - The id of the input.
@@ -137,6 +151,7 @@ function getValue(id) {
   // @ts-ignore
   return el.value;
 }
+
 
 /**
  * Set the URL of an image element.
@@ -159,31 +174,27 @@ function setImageURL(id, url) {
 
 
 /**
- * Hide an element.
- * @param {string} id - The id of the element.
+ * Show or hide element.
+ * @param {string} id - The id of button.
+ * @param {boolean} [status=false] - show or hide.
  * 
  * @example
- * hideElement("divContainer");
+ * visibleElement("ID", true);
  */
-function hideElement(elementId) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        element.classList.add("d-none");
+function visibleElement(id, status) {
+  const el = document.getElementById(id)
+  if (!el) {
+    console.warn("visibleElement: Element with id '" + id + "' not found.");
+    return;
+  } else {
+    if (status == true) {
+      el.classList.remove("d-none");
+      console.info("visibleElement: Element with id '" + id + "' is shown.");
+    } else {
+      el.classList.add("d-none");
+      console.info("visibleElement: Element with id '" + id + "' is hidden.");
     }
-}
-
-/**
- * Show an element.
- * @param {string} id - The id of the element.
- * 
- * @example
- * showElement("divContainer");
- */
-function showElement(elementId) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        element.classList.remove("d-none");
-    }
+  }
 }
 
 
@@ -193,14 +204,14 @@ function showElement(elementId) {
  * @param {boolean} [status=false] - disable or enable.
  * 
  * @example
- * playSound("beep.mp3");
+ * disableButton("ID", true);
  */
-function disableButton(elementId, status){
-    const element = document.getElementById(elementId)
-    if(status == true){
-        element.classList.add('disabled');
-    } else {
-        element.classList.remove('disabled');
-    }
+function disableButton(id, status) {
+  const el = document.getElementById(id)
+  if (status == true) {
+    el.classList.add('disabled');
+  } else {
+    el.classList.remove('disabled');
+  }
 }
 
