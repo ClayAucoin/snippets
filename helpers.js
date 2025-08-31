@@ -61,19 +61,19 @@ function setProperty(id, property, value) {
  * playSound("beep.mp3");
  */
 function playMySound(src, loop = false, volume = 1.0) {
-    if (!src) {
-        console.warn("playMySound: No SRC provided.");
-        return;
-    };
-    const audio = new Audio(src);
-    audio.loop = loop;
-    audio.volume = volume;   // 0.0 = silent, 1.0 = full
-    audio.currentTime = 0;
-    audio.play();
-    console.info("playMySound: Playing " + src +
-        (loop ? " (looping)" : "") +
-        (volume !== undefined ? ` (volume=${volume})` : "")
-    );
+  if (!src) {
+    console.warn("playMySound: No SRC provided.");
+    return;
+  };
+  const audio = new Audio(src);
+  audio.loop = loop;
+  audio.volume = volume;   // 0.0 = silent, 1.0 = full
+  audio.currentTime = 0;
+  audio.play();
+  console.info("playMySound: Playing " + src +
+    (loop ? " (looping)" : "") +
+    (volume !== undefined ? ` (volume=${volume})` : "")
+  );
 }
 
 
@@ -186,14 +186,13 @@ function visibleElement(id, status) {
   if (!el) {
     console.warn("visibleElement: Element with id '" + id + "' not found.");
     return;
+  }
+  if (status == true) {
+    el.classList.remove("d-none");
+    console.info("visibleElement: Element with id '" + id + "' is shown.");
   } else {
-    if (status == true) {
-      el.classList.remove("d-none");
-      console.info("visibleElement: Element with id '" + id + "' is shown.");
-    } else {
-      el.classList.add("d-none");
-      console.info("visibleElement: Element with id '" + id + "' is hidden.");
-    }
+    el.classList.add("d-none");
+    console.info("visibleElement: Element with id '" + id + "' is hidden.");
   }
 }
 
@@ -208,6 +207,10 @@ function visibleElement(id, status) {
  */
 function disableButton(id, status) {
   const el = document.getElementById(id)
+  if (!el) {
+    console.warn("disableButton: Element with id '" + id + "' not found.");
+    return;
+  }
   if (status == true) {
     el.classList.add('disabled');
   } else {
