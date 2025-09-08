@@ -19,8 +19,30 @@ PROJECT_PATH="$BASE_DIR/$PROJECT_NAME"
 
 mkdir -p "$PROJECT_PATH" \
   && cd "$PROJECT_PATH" \
-  && touch index.html style.css \
-  && curl -o helpers.js https://clayaucoin.github.io/snippets/helpers.js \
+  && touch index.html README.md .gitignore \
+  && mkdir css \
+  && cd css \
+  && touch style.css \
+  && cd .. \
+  && mkdir images \
+  && mkdir js \
+  && cd js \
+  && curl -o helpers-full.js https://clayaucoin.github.io/snippets/helpers-full.js \
+  && curl -o helpers-old.js https://clayaucoin.github.io/snippets/helpers-old.js \
+  && touch script.js secret-variables.js app.js \
+  && cd .. \
+  && mkdir .github \
+  && cd .github \
+  && mkdir workflows \
+  && cd workflows \
+  && curl -o pages.yml https://clayaucoin.github.io/snippets/pages.yml \
+  && cd ../.. \
+  && cat <<EOF > .gitignore
+node_modules/
+secret-variables.js
+.DS_Store
+Thumbs.db
+EOF
   && git init \
   && git add . \
   && git commit -m "init"
