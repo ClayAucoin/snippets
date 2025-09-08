@@ -40,7 +40,19 @@ mkdir -p "$PROJECT_PATH" \
   && cat <<EOF > .gitignore
 node_modules/
 secret-variables.js
-.DS_Store
+
+# logs
+.vscode/
+
+# birtual environment directories
+env/
+venv/
+ENV/
+env.bak/
+venv.bak
+.venv/
+
+# windows system files
 Thumbs.db
 EOF
   && git init \
