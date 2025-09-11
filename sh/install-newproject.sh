@@ -22,14 +22,18 @@ mkdir -p "$PROJECT_PATH" \
   && touch index.html README.md .gitignore \
   && mkdir css \
   && cd css \
-  && curl -o modal-style.css https://clayaucoin.github.io/snippets/css/modal-style.css \
+  && curl -o modal-html-style.css https://clayaucoin.github.io/snippets/css/modal-html-style.css \
   && touch style.css \
   && cd .. \
   && mkdir images \
+  && cd images \
+  && curl -o favicon.ico https://clayaucoin.github.io/snippets/images/favicon.ico \
+  && cd .. \
   && mkdir js \
   && cd js \
   && curl -o helpers-full.js https://clayaucoin.github.io/snippets/js/helpers-full.js \
   && curl -o helpers-old.js https://clayaucoin.github.io/snippets/js/helpers-old.js \
+  && curl -o modal-html.js https://clayaucoin.github.io/snippets/js/modal-html.js \
   && curl -o myHelpers.js https://clayaucoin.github.io/snippets/js/myHelpers.js \
   && touch variables.js script.js secret-variables.js app.js \
   && cd .. \
