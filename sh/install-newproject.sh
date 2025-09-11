@@ -22,20 +22,22 @@ mkdir -p "$PROJECT_PATH" \
   && touch index.html README.md .gitignore \
   && mkdir css \
   && cd css \
+  && curl -o modal-style.css https://clayaucoin.github.io/snippets/css/modal-style.css \
   && touch style.css \
   && cd .. \
   && mkdir images \
   && mkdir js \
   && cd js \
-  && curl -o helpers-full.js https://clayaucoin.github.io/snippets/helpers-full.js \
-  && curl -o helpers-old.js https://clayaucoin.github.io/snippets/helpers-old.js \
+  && curl -o helpers-full.js https://clayaucoin.github.io/snippets/js/helpers-full.js \
+  && curl -o helpers-old.js https://clayaucoin.github.io/snippets/js/helpers-old.js \
+  && curl -o myHelpers.js https://clayaucoin.github.io/snippets/js/myHelpers.js \
   && touch variables.js script.js secret-variables.js app.js \
   && cd .. \
   && mkdir .github \
   && cd .github \
   && mkdir workflows \
   && cd workflows \
-  && curl -o pages.yml https://clayaucoin.github.io/snippets/pages.yml \
+  && curl -o pages.yml https://clayaucoin.github.io/snippets/yml/pages.yml \
   && cd ../.. \
   && cat <<EOF > .gitignore
 node_modules/
@@ -55,12 +57,10 @@ venv.bak
 # windows system files
 Thumbs.db
 EOF
-  && git init \
+
+git init \
   && git add . \
   && git commit -m "init"
-
-echo "Project '$PROJECT_NAME' created and initialized in $PROJECT_PATH"
-EOF
 
 # Make it executable
 chmod +x "$TARGET"
