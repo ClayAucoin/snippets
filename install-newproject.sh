@@ -29,7 +29,7 @@ mkdir -p "$PROJECT_PATH" \
   && cd js \
   && curl -o helpers-full.js https://clayaucoin.github.io/snippets/helpers-full.js \
   && curl -o helpers-old.js https://clayaucoin.github.io/snippets/helpers-old.js \
-  && touch script.js secret-variables.js app.js \
+  && touch variables.js script.js secret-variables.js app.js \
   && cd .. \
   && mkdir .github \
   && cd .github \
