@@ -11,58 +11,68 @@ console.log("my-helpers.js says hi");
  * - Use IDs on all interactive elements. These helpers target by id.
  *
  * ---------------------------------------------------------------------------
- * visibleElement(id, status)
+ * consoleDisplay(fname, result)
  * disableButton(id, status)
- * displayResult(fname, result)
  * playMySound(src, loop = false, volume = 1.0)
+ * visibleElement(id, status)
  * ---------------------------------------------------------------------------
  */
 
 
+
 /**
- * Toggle visibility of a DOM element by adding/removing the Bootstrap `d-none` class.
+ * Display results in the console in two formats:
+ *   1. Raw object (expandable in DevTools)
+ *   2. Pretty-printed JSON (stringified, if valid JSON)
+ *   3. Plain string (logged directly if not JSON)
  *
- * Accepts either:
- * - an element ID string (e.g. `"myDiv"`), or
- * - a direct DOM element reference (e.g. `document.getElementById("myDiv")`).
- *
- * @param {string|HTMLElement} target - The element ID or DOM element to show/hide.
- * @param {boolean} [status=false] - Whether to show (`true`) or hide (`false`).
- *                                   Defaults to `false` (hide).
- *
- * @example
- * Show element by ID
- * visibleElement("myDiv", true);
+ * @param {string} fname - Label (usually the function name).
+ * @param {object|string} result - The fetch result. Can be a parsed object
+ *                                 or a raw JSON string.
  *
  * @example
- * Hide element by ID
- * visibleElement("myDiv", false);
+ * With an object:
+ * consoleDisplay("fetchByZip", { city: "New York", state: "NY" });
  *
  * @example
- * Show element using a direct DOM reference
- * const el = document.getElementById("myDiv");
- * visibleElement(el, true);
+ * With a JSON string:
+ * consoleDisplay("fetchByZip", '{"city":"New York","state":"NY"}');
+ *
+ * @example
+ * With a plain string:
+ * consoleDisplay("fetchByZip", "Service unavailable");
  */
-function visibleElement(target, status = false) {
-    let el = target;
+function consoleDisplay(fname, result) {
+	const resultDisplay = true;
+	const stringifyDisplay = true;
 
-    // Resolve string IDs to an element
-    if (typeof target === "string") {
-        el = document.getElementById(target);
-    }
+	if (resultDisplay) {
+		console.log("01: result from %s: %o", fname, result);
+	}
 
-    if (!el) {
-        console.warn(`visibleElement: Element '${target}' not found.`);
-        return;
-    }
+	if (!stringifyDisplay) return;
 
-    if (status) {
-        el.classList.remove("d-none");
-        console.info(`visibleElement: Element '${el.id || "[no id]"}' has been shown.`);
-    } else {
-        el.classList.add("d-none");
-        console.info(`visibleElement: Element '${el.id || "[no id]"}' has been hidden.`);
-    }
+	try {
+		let parsed = result;
+
+		if (typeof result === "string") {
+			try {
+				parsed = JSON.parse(result); // try parsing JSON string
+			} catch {
+				// not JSON, just log raw string
+				console.log(`02: result from ${fname} (plain string): "${result}"`);
+				return;
+			}
+		}
+
+		if (typeof parsed === "object" && parsed !== null) {
+			// console.log(`02: result from ${fname} (pretty JSON):\n${JSON.stringify(parsed, null, 2)}`);
+		} else {
+			console.log(`02: result from ${fname} (value):`, parsed);
+		}
+	} catch (e) {
+		console.log(`02: not valid JSON/object:`, e.message);
+	}
 }
 
 
@@ -120,49 +130,6 @@ function disableButton(target, status = false) {
 
 
 /**
- * Display results in the console in two formats:
- *   1. Raw object (expandable in DevTools)
- *   2. Pretty-printed JSON (stringified)
- *
- * @param {string} fname - Label (usually the function name).
- * @param {object|string} result - The fetch result. Can be a parsed object
- *                                 or a raw JSON string.
- *
- * @example
- * With an object:
- * displayResult("fetchByZip", { city: "New York", state: "NY" });
- *
- * @example
- * With a JSON string:
- * displayResult("fetchByZip", '{"city":"New York","state":"NY"}');
- */
-function displayResult(fname, result) {
-    const resultDisplay = true;
-    const stringifyDisplay = true;
-
-    if (resultDisplay) {
-        console.log("01: result from %s: %o", fname, result);
-    }
-
-    try {
-        if (stringifyDisplay) {
-            let parsed = result;
-
-            if (typeof result === "string") {
-                parsed = JSON.parse(result);
-            }
-
-            if (typeof parsed === "object" && parsed !== null) {
-                console.log(`02: result from ${fname}:\n${JSON.stringify(parsed, null, 2)}`);
-            }
-        }
-    } catch (e) {
-        console.log("02: not valid JSON/object", e.message);
-    }
-}
-
-
-/**
  * Play a sound from a given URL.
  *
  * Creates and returns an `HTMLAudioElement` so you can pause, stop,
@@ -208,4 +175,51 @@ function playMySound(src, loop = false, volume = 1.0) {
         });
 
     return audio;
+}
+
+
+/**
+ * Toggle visibility of a DOM element by adding/removing the Bootstrap `d-none` class.
+ *
+ * Accepts either:
+ * - an element ID string (e.g. `"myDiv"`), or
+ * - a direct DOM element reference (e.g. `document.getElementById("myDiv")`).
+ *
+ * @param {string|HTMLElement} target - The element ID or DOM element to show/hide.
+ * @param {boolean} [status=false] - Whether to show (`true`) or hide (`false`).
+ *                                   Defaults to `false` (hide).
+ *
+ * @example
+ * Show element by ID
+ * visibleElement("myDiv", true);
+ *
+ * @example
+ * Hide element by ID
+ * visibleElement("myDiv", false);
+ *
+ * @example
+ * Show element using a direct DOM reference
+ * const el = document.getElementById("myDiv");
+ * visibleElement(el, true);
+ */
+function visibleElement(target, status = false) {
+    let el = target;
+
+    // Resolve string IDs to an element
+    if (typeof target === "string") {
+        el = document.getElementById(target);
+    }
+
+    if (!el) {
+        console.warn(`visibleElement: Element '${target}' not found.`);
+        return;
+    }
+
+    if (status) {
+        el.classList.remove("d-none");
+        console.info(`visibleElement: Element '${el.id || "[no id]"}' has been shown.`);
+    } else {
+        el.classList.add("d-none");
+        console.info(`visibleElement: Element '${el.id || "[no id]"}' has been hidden.`);
+    }
 }
