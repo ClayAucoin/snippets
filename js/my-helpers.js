@@ -1,11 +1,11 @@
-console.log("myHelpers.js says hi");
+console.log("my-helpers.js says hi");
 
 
 /* myHelpers.js
  * Include AFTER your HTML elements.
  * 
  * Example:
- *   <script src="myHelpers.js"></script>
+ *   <script src="my-helpers.js"></script>
  *
  * Notes:
  * - Use IDs on all interactive elements. These helpers target by id.

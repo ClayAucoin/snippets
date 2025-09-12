@@ -44,7 +44,7 @@ curl -fsSL -o images/favicon.ico https://clayaucoin.github.io/snippets/images/fa
 curl -fsSL -o js/helpers-full.js https://clayaucoin.github.io/snippets/js/helpers-full.js
 curl -fsSL -o js/helpers-old.js  https://clayaucoin.github.io/snippets/js/helpers-old.js
 curl -fsSL -o js/modal-html.js   https://clayaucoin.github.io/snippets/js/modal-html.js
-curl -fsSL -o js/myHelpers.js    https://clayaucoin.github.io/snippets/js/myHelpers.js
+curl -fsSL -o js/my-helpers.js    https://clayaucoin.github.io/snippets/js/my-helpers.js
 curl -fsSL -o js/variables.js    https://clayaucoin.github.io/snippets/js/variables.js
 touch js/script.js js/secret-variables.js js/app.js
 
