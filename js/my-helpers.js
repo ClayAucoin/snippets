@@ -29,6 +29,7 @@ console.log("my-helpers.js says hi");
  * @param {string} fname - Label (usually the function name).
  * @param {object|string} result - The fetch result. Can be a parsed object
  *                                 or a raw JSON string.
+ * @param {boolean} [status=false] - Whether to display pretty-printed JSON
  *
  * @example
  * With an object:
@@ -36,13 +37,16 @@ console.log("my-helpers.js says hi");
  *
  * @example
  * With a JSON string:
- * consoleDisplay("fetchByZip", '{"city":"New York","state":"NY"}');
+ * consoleDisplay("fetchByZip", '{"city":"New York","state":"NY"}', true);
  *
  * @example
  * With a plain string:
  * consoleDisplay("fetchByZip", "Service unavailable");
  */
-function consoleDisplay(fname, result) {
+function consoleDisplay(fname, result, prettyprint = false) {
+
+	// const displayPretty = false;	// display pretty-printed JSON
+
 	const resultDisplay = true;
 	const stringifyDisplay = true;
 
@@ -66,7 +70,9 @@ function consoleDisplay(fname, result) {
 		}
 
 		if (typeof parsed === "object" && parsed !== null) {
-			// console.log(`02: result from ${fname} (pretty JSON):\n${JSON.stringify(parsed, null, 2)}`);
+			if (prettyprint) {
+				console.log(`02: result from ${fname} (pretty JSON):\n${JSON.stringify(parsed, null, 2)}`);
+			}
 		} else {
 			console.log(`02: result from ${fname} (value):`, parsed);
 		}
