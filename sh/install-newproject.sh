@@ -34,23 +34,23 @@ touch index.html README.md .gitignore
 mkdir -p css images js .github/workflows
 
 # css
-curl -fsSL -o css/modal-html-style.css https://clayaucoin.github.io/snippets/css/modal-html-style.css
+curl -fsSL -o css/modal-html-style.css 		https://clayaucoin.github.io/snippets/css/modal-html-style.css
 touch css/style.css
 
 # images
-curl -fsSL -o images/favicon.ico https://clayaucoin.github.io/snippets/images/favicon.ico
+curl -fsSL -o images/favicon.ico 			https://clayaucoin.github.io/snippets/images/favicon.ico
 
 # js
-curl -fsSL -o js/console-display.js    https://clayaucoin.github.io/snippets/js/console-display.js
-curl -fsSL -o js/helpers-full.js https://clayaucoin.github.io/snippets/js/helpers-full.js
-curl -fsSL -o js/helpers-old.js  https://clayaucoin.github.io/snippets/js/helpers-old.js
-curl -fsSL -o js/modal-html.js   https://clayaucoin.github.io/snippets/js/modal-html.js
-curl -fsSL -o js/my-helpers.js    https://clayaucoin.github.io/snippets/js/my-helpers.js
-curl -fsSL -o js/variables.js    https://clayaucoin.github.io/snippets/js/variables.js
+curl -fsSL -o js/console-display.js   		https://clayaucoin.github.io/snippets/js/console-display.js
+curl -fsSL -o js/helpers-full.js      		https://clayaucoin.github.io/snippets/js/helpers-full.js
+curl -fsSL -o js/helpers-old.js       		https://clayaucoin.github.io/snippets/js/helpers-old.js
+curl -fsSL -o js/modal-html.js        		https://clayaucoin.github.io/snippets/js/modal-html.js
+curl -fsSL -o js/my-helpers.js        		https://clayaucoin.github.io/snippets/js/my-helpers.js
+curl -fsSL -o js/variables.js         		https://clayaucoin.github.io/snippets/js/variables.js
 touch js/script.js js/secret-variables.js js/app.js
 
 # GitHub Actions
-curl -fsSL -o .github/workflows/pages.yml https://clayaucoin.github.io/snippets/yml/pages.yml
+curl -fsSL -o .github/workflows/pages.yml 	https://clayaucoin.github.io/snippets/yml/pages.yml
 
 # .gitignore
 cat > .gitignore <<'GITIGNORE_EOF'
