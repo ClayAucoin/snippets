@@ -1,18 +1,14 @@
 console.log("myHelpers.js says hi");
 
 
-/* helpers-full.js
- * Student-friendly helper functions for building interactive apps (App Lab–style).
+/* myHelpers.js
  * Include AFTER your HTML elements.
  * 
- * Includes all helper functions in App Lab.
- *
  * Example:
- *   <script src="helpers-full.js"></script>
+ *   <script src="myHelpers.js"></script>
  *
  * Notes:
  * - Use IDs on all interactive elements. These helpers target by id.
- * - "Screens": use ids that start with "screen" (e.g., screenHome, screenGame).
  *
  * ---------------------------------------------------------------------------
  * visibleElement(id, status)
